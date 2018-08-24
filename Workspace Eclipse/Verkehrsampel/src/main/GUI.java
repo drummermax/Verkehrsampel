@@ -262,7 +262,7 @@ public class GUI extends JFrame {
 						pixelColorInt & 0x000000ff);
 
 				if (pixelColor.equals(lineColor)) {
-					originalArray[x] = y;
+					originalArray[x] = dimensionGraph.height - y;
 				}
 			}
 		}

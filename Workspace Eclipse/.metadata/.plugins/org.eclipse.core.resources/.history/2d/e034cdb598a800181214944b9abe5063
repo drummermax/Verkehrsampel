@@ -1,0 +1,381 @@
+package main;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
+
+import javax.swing.AbstractButton;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class GUI extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel panel;
+	private JLabel label_graphRed, label_graphYellow, label_graphGreen;
+	private JButton button_calculateGraphs, button_clearGraphs;
+	private JTextField textfield_sequenceLength;
+	private JComboBox<String> comboBox_portNames;
+
+	private Dimension dimensionGraph;
+	private BufferedImage bufferedImage_graphRed, bufferedImage_graphYellow, bufferedImage_graphGreen;
+	private Graphics2D graphics2d_graphRed, graphics2d_graphYellow, graphics2d_graphGreen;
+
+	private int brightnessSteps = 16;
+	private int[] brightness_red, brightness_yellow, brightness_green;
+	
+	private double sequenceLengthSeconds = 1;
+	private int[] sequence;
+
+	public GUI() {
+		this.setSize(1000, 560);
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 20, 1000, 680);
+		add(panel);
+
+		dimensionGraph = new Dimension(800, brightnessSteps*8);
+
+		brightness_red = new int[dimensionGraph.width];
+		Arrays.fill(brightness_red, -1);
+		brightness_red[0] = 0;
+		brightness_red[dimensionGraph.width - 1] = 0;
+
+		brightness_yellow = new int[dimensionGraph.width];
+		Arrays.fill(brightness_yellow, -1);
+		brightness_yellow[0] = 0;
+		brightness_yellow[dimensionGraph.width - 1] = 0;
+
+		brightness_green = new int[dimensionGraph.width];
+		Arrays.fill(brightness_green, -1);
+		brightness_green[0] = 0;
+		brightness_green[dimensionGraph.width - 1] = 0;
+
+		label_graphRed = new JLabel();
+		label_graphRed.setBounds(25, 25, dimensionGraph.width, dimensionGraph.height);
+		label_graphRed.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				brightness_red[e.getX()] = dimensionGraph.height - e.getY();
+				refreshLines();
+			}
+		});
+		panel.add(label_graphRed);
+
+		label_graphYellow = new JLabel();
+		label_graphYellow.setBounds(25, dimensionGraph.height + 50, dimensionGraph.width, dimensionGraph.height);
+		label_graphYellow.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				brightness_yellow[e.getX()] = dimensionGraph.height - e.getY();
+				refreshLines();
+			}
+		});
+		panel.add(label_graphYellow);
+
+		label_graphGreen = new JLabel();
+		label_graphGreen.setBounds(25, 2 * dimensionGraph.height + 50, dimensionGraph.width, dimensionGraph.height);
+		label_graphGreen.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				brightness_green[e.getX()] = dimensionGraph.height - e.getY();
+				refreshLines();
+			}
+		});
+		panel.add(label_graphGreen);
+
+		refreshLines();
+
+		button_calculateGraphs = new JButton("Calc Graphs");
+		button_calculateGraphs.setVerticalTextPosition(AbstractButton.CENTER);
+		button_calculateGraphs.setHorizontalTextPosition(AbstractButton.LEADING);
+		button_calculateGraphs.setMnemonic(KeyEvent.VK_S);
+		button_calculateGraphs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calculateGraphs();
+			}
+		});
+		button_calculateGraphs.setBounds(dimensionGraph.width + 50, 25, 125, 40);
+		panel.add(button_calculateGraphs);
+
+		button_clearGraphs = new JButton("Clear Graphs");
+		button_clearGraphs.setVerticalTextPosition(AbstractButton.CENTER);
+		button_clearGraphs.setHorizontalTextPosition(AbstractButton.LEADING);
+		button_clearGraphs.setMnemonic(KeyEvent.VK_C);
+		button_clearGraphs.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				calculateGraphs();
+			}
+		});
+		button_clearGraphs.setBounds(dimensionGraph.width + 50, 25, 125, 40);
+		panel.add(button_clearGraphs);
+
+		textfield_sequenceLength = new JTextField("Länge in sek");
+		textfield_sequenceLength.setForeground(Color.BLACK);
+		textfield_sequenceLength.setBackground(Color.WHITE);
+		textfield_sequenceLength.setBounds(dimensionGraph.width + 50, 75, 125, 25);
+		textfield_sequenceLength.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					sequenceLengthSeconds = Double.parseDouble(textfield_sequenceLength.getText());
+				} catch (NumberFormatException eNumberFirmatException) {
+				}
+				textfield_sequenceLength.setText("Länge: " + Double.toString(sequenceLengthSeconds));
+			}
+		});
+		panel.add(textfield_sequenceLength);
+		
+		comboBox_portNames = new JComboBox<String>(RS232.getInstance().getPortNames());
+		comboBox_portNames.setSelectedIndex(-1);
+		comboBox_portNames.setBounds(dimensionGraph.width + 50, 125, 125, 25);
+		comboBox_portNames.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RS232.getInstance().setPortName(comboBox_portNames.getSelectedItem().toString());
+			}
+		});
+		panel.add(comboBox_portNames);
+
+		// this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Verkehrsampel");
+		this.setResizable(false);
+		this.setLayout(null);
+		this.getContentPane().setBackground(Color.WHITE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setVisible(true);
+	}
+
+	public void close() {
+		System.exit(0);
+		this.dispose();
+	}
+
+	public void refreshLines() {
+		bufferedImage_graphRed = new BufferedImage(dimensionGraph.width, dimensionGraph.height,
+				BufferedImage.TYPE_INT_RGB);
+		bufferedImage_graphYellow = new BufferedImage(dimensionGraph.width, dimensionGraph.height,
+				BufferedImage.TYPE_INT_RGB);
+		bufferedImage_graphGreen = new BufferedImage(dimensionGraph.width, dimensionGraph.height,
+				BufferedImage.TYPE_INT_RGB);
+
+		graphics2d_graphRed = bufferedImage_graphRed.createGraphics();
+		
+		
+		for (int i = 0; i < brightnessSteps; i++) {
+			graphics2d_graphRed.setColor(new Color(255 - i * 255/brightnessSteps, 0, 0));
+			graphics2d_graphRed.fillRect(0, i * dimensionGraph.height / brightnessSteps, dimensionGraph.width, dimensionGraph.height / brightnessSteps);
+		}
+
+		int x1 = 0, x2 = 1;
+
+		while (x2 < dimensionGraph.width - 1) {
+			x2 = x1 + 1;
+			while (brightness_red[x2] == -1)
+				x2++;
+
+			graphics2d_graphRed.setColor(Color.WHITE);
+			graphics2d_graphRed.setStroke(new BasicStroke(1));
+			graphics2d_graphRed.drawLine(x1, dimensionGraph.height - brightness_red[x1], x2,
+					dimensionGraph.height - brightness_red[x2]);
+
+			x1 = x2;
+		}
+
+		label_graphRed.setIcon(new ImageIcon(bufferedImage_graphRed));
+
+		graphics2d_graphYellow = bufferedImage_graphYellow.createGraphics();
+
+		
+		for (int i = 0; i < brightnessSteps; i++) {
+			graphics2d_graphYellow.setColor(new Color(255 - i * 255/brightnessSteps, 255 - i * 255/brightnessSteps, 0));
+			graphics2d_graphYellow.fillRect(0, i * dimensionGraph.height / brightnessSteps, dimensionGraph.width, dimensionGraph.height / brightnessSteps);
+		}
+
+		x1 = 0;
+		x2 = 1;
+
+		while (x2 < dimensionGraph.width - 1) {
+			x2 = x1 + 1;
+			while (brightness_yellow[x2] == -1)
+				x2++;
+
+			graphics2d_graphYellow.setColor(Color.WHITE);
+			graphics2d_graphYellow.setStroke(new BasicStroke(1));
+			graphics2d_graphYellow.drawLine(x1, dimensionGraph.height - brightness_yellow[x1], x2,
+					dimensionGraph.height - brightness_yellow[x2]);
+
+			x1 = x2;
+		}
+
+		label_graphYellow.setIcon(new ImageIcon(bufferedImage_graphYellow));
+
+		graphics2d_graphGreen = bufferedImage_graphGreen.createGraphics();
+
+		
+		for (int i = 0; i < brightnessSteps; i++) {
+			graphics2d_graphGreen.setColor(new Color(0, 255 - i * 255/brightnessSteps, 0));
+			graphics2d_graphGreen.fillRect(0, i * dimensionGraph.height / brightnessSteps, dimensionGraph.width, dimensionGraph.height / brightnessSteps);
+		}
+
+		x1 = 0;
+		x2 = 1;
+
+		while (x2 < dimensionGraph.width - 1) {
+			x2 = x1 + 1;
+			while (brightness_green[x2] == -1)
+				x2++;
+
+			graphics2d_graphGreen.setColor(Color.WHITE);
+			graphics2d_graphGreen.setStroke(new BasicStroke(1));
+			graphics2d_graphGreen.drawLine(x1, dimensionGraph.height - brightness_green[x1], x2,
+					dimensionGraph.height - brightness_green[x2]);
+
+			x1 = x2;
+		}
+
+		label_graphGreen.setIcon(new ImageIcon(bufferedImage_graphGreen));
+
+	}
+
+	public void roundGraphs() {
+		brightness_red = roundGraph(brightness_red);
+		brightness_yellow = roundGraph(brightness_yellow);
+		brightness_green = roundGraph(brightness_green);
+	}
+
+	private int[] roundGraph(int[] graph) {
+		for (int i = 0; i < graph.length; i++) {
+			if (graph[i] == -1) {
+
+			} else {
+				int j = 1;
+				while (graph[i] > (j * dimensionGraph.height / brightnessSteps))
+					j++;
+
+				graph[i] = (2*j-1) * dimensionGraph.height / (2*brightnessSteps);	
+			}
+		}
+
+		return graph;
+	}
+
+	public void graphsImageToArray() {
+		brightness_red = graphImageToArray(bufferedImage_graphRed, Color.WHITE, brightness_red);
+		brightness_yellow = graphImageToArray(bufferedImage_graphYellow, Color.WHITE, brightness_yellow);
+		brightness_green = graphImageToArray(bufferedImage_graphGreen, Color.WHITE, brightness_green);
+	}
+
+	private int[] graphImageToArray(BufferedImage bufferedImage, Color lineColor, int[] originalArray) {
+		int pixelColorInt;
+		Color pixelColor;
+
+		for (int x = 0; x < originalArray.length; x++) {
+			for (int y = 0; y < bufferedImage.getHeight(); y++) {
+				pixelColorInt = bufferedImage.getRGB(x, y);
+				pixelColor = new Color((pixelColorInt & 0x00ff0000) >> 16, (pixelColorInt & 0x0000ff00) >> 8,
+						pixelColorInt & 0x000000ff);
+
+				if (pixelColor.equals(lineColor)) {
+					originalArray[x] = dimensionGraph.height - y;
+				}
+			}
+		}
+
+		return originalArray;
+	}
+	
+	public void graphsToRealBrightness() {
+		brightness_red = graphToRealBrightness(brightness_red);
+		brightness_yellow = graphToRealBrightness(brightness_yellow);
+		brightness_green = graphToRealBrightness(brightness_green);
+	}
+	
+	private int[] graphToRealBrightness(int[] graph) {
+		for (int i = 0; i < graph.length; i++) {
+			graph[i] -= dimensionGraph.height/(2*brightnessSteps);
+			graph[i] /= dimensionGraph.height/brightnessSteps;
+		}
+		
+		return graph;
+	}
+	
+	private void calculateSequence() {
+		int sequenceLength = (int) Math.floor(sequenceLengthSeconds*10);
+		sequence = new int[sequenceLength];
+		
+		for (int i = 0; i < sequenceLength; i++) {
+			sequence[i] = (brightness_red[i * dimensionGraph.width/sequenceLength] << 12);
+			sequence[i] |= (brightness_yellow[i * dimensionGraph.width/sequenceLength] << 8);
+			sequence[i] |= (brightness_green[i * dimensionGraph.width/sequenceLength] << 4);
+			
+			System.out.print("0b");
+			System.out.print(String.format("%16s", Integer.toBinaryString(sequence[i] & 0xFFFF)).replace(' ', '0'));
+			System.out.print(", ");
+		}
+	}
+
+	public void calculateGraphs() {
+		graphsImageToArray();
+
+		roundGraphs();
+		
+		refreshLines();
+		
+		graphsToRealBrightness();
+		
+		calculateSequence();
+	}
+	
+	public void clearGraphs() {
+		
+	}
+	
+	private int[] clearGraph(int[] graph) {
+		for (int i = 0; i < graph.length; i++) {
+			graph[i] = -1;
+		}
+		
+		graph[0] = 0;
+		graph[graph.length-1] = 0;
+		
+		return null;
+	}
+
+	/*
+	private int[] calculateGraph(int[] graph) {
+		int x1 = 0, x2 = 1, xMid;
+
+		while (x2 < dimensionGraph.width - 1) {
+			x2 = x1 + 1;
+			while (graph[x2] == -1)
+				x2++;
+
+			xMid = x1 + (x2 - x1) / 2;
+
+			for (int i = x1; i < xMid; i++)
+				graph[i] = graph[x1];
+
+			for (int i = xMid; i < x2; i++)
+				graph[i] = graph[x2];
+
+			x1 = x2;
+		}
+
+		return graph;
+	}
+	*/
+}

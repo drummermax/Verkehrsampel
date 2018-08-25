@@ -1,0 +1,160 @@
+package main;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+import java.util.Arrays;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class GUI extends JFrame implements MouseListener {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel panel;
+	private JLabel label_graphRed, label_graphYellow, label_graphGreen;
+	
+	
+	
+	
+	private Dimension dimensionGraph;
+	private BufferedImage bufferedImage_graphRed, bufferedImage_graphYellow, bufferedImage_graphGreen;
+	private Graphics2D graphics2d_graphRed, graphics2d_graphYellow, graphics2d_graphGreen;
+	
+	private int[] brightness_red, brightness_yellow, brightness_green;
+
+	public GUI() {
+		this.setSize(1000, 560);
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 20, 1000, 680);
+		add(panel);
+		
+
+		dimensionGraph = new Dimension(800, 100);
+
+		brightness_red = new int[dimensionGraph.width];
+		Arrays.fill(brightness_red, -1);
+		brightness_yellow = new int[dimensionGraph.width];
+		brightness_green = new int[dimensionGraph.width];
+		
+
+		label_graphRed = new JLabel();
+		label_graphRed.setBounds(25, 25, dimensionGraph.width, dimensionGraph.height);
+		label_graphRed.addMouseListener(new MouseAdapter() {  
+		    public void mouseClicked(MouseEvent e) {
+		    	
+		    }
+		}); 
+		panel.add(label_graphRed);
+
+		label_graphYellow = new JLabel();
+		label_graphYellow.setBounds(25, dimensionGraph.height + 50, dimensionGraph.width, dimensionGraph.height);
+		panel.add(label_graphYellow);
+
+		label_graphGreen = new JLabel();
+		label_graphGreen.setBounds(25, 2*dimensionGraph.height + 100, dimensionGraph.width, dimensionGraph.height);
+		panel.add(label_graphGreen);
+		
+		
+		bufferedImage_graphRed = new BufferedImage(dimensionGraph.width, dimensionGraph.height, BufferedImage.TYPE_INT_RGB);
+		bufferedImage_graphYellow = new BufferedImage(dimensionGraph.width, dimensionGraph.height, BufferedImage.TYPE_INT_RGB);
+		bufferedImage_graphGreen = new BufferedImage(dimensionGraph.width, dimensionGraph.height, BufferedImage.TYPE_INT_RGB);
+
+
+		graphics2d_graphRed = bufferedImage_graphRed.createGraphics();
+		graphics2d_graphRed.setColor(new Color(200, 200, 200));
+		graphics2d_graphRed.fillRect(0, 0 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphRed.setColor(new Color(150, 150, 150));
+		graphics2d_graphRed.fillRect(0, 1 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphRed.setColor(new Color(100, 100, 100));
+		graphics2d_graphRed.fillRect(0, 2 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphRed.setColor(new Color(50, 50, 50));
+		graphics2d_graphRed.fillRect(0, 3 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+    	
+        label_graphRed.setIcon(new ImageIcon(bufferedImage_graphRed));
+
+        
+		graphics2d_graphYellow = bufferedImage_graphYellow.createGraphics();
+		graphics2d_graphYellow.setColor(new Color(200, 200, 200));
+		graphics2d_graphYellow.fillRect(0, 0 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphYellow.setColor(new Color(150, 150, 150));
+		graphics2d_graphYellow.fillRect(0, 1 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphYellow.setColor(new Color(100, 100, 100));
+		graphics2d_graphYellow.fillRect(0, 2 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphYellow.setColor(new Color(50, 50, 50));
+		graphics2d_graphYellow.fillRect(0, 3 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+    	
+        label_graphYellow.setIcon(new ImageIcon(bufferedImage_graphYellow));
+
+        
+		graphics2d_graphGreen = bufferedImage_graphGreen.createGraphics();
+		graphics2d_graphGreen.setColor(new Color(200, 200, 200));
+		graphics2d_graphGreen.fillRect(0, 0 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphGreen.setColor(new Color(150, 150, 150));
+		graphics2d_graphGreen.fillRect(0, 1 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphGreen.setColor(new Color(100, 100, 100));
+		graphics2d_graphGreen.fillRect(0, 2 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+		graphics2d_graphGreen.setColor(new Color(50, 50, 50));
+		graphics2d_graphGreen.fillRect(0, 3 * dimensionGraph.height/4, dimensionGraph.width, dimensionGraph.height/4);
+    	
+        label_graphGreen.setIcon(new ImageIcon(bufferedImage_graphGreen));
+        
+        
+		
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Verkehrsampel");
+		this.setResizable(false);
+		this.setLayout(null);
+		this.getContentPane().setBackground(Color.WHITE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	public void close() {
+		System.exit(0);
+		this.dispose();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

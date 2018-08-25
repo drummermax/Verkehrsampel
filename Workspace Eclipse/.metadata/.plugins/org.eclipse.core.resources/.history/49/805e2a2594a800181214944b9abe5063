@@ -1,0 +1,34 @@
+package main;
+
+import java.util.Enumeration;
+
+import gnu.io.*;
+
+public class RS232 {
+	private static RS232 instance;
+	
+	public static RS232 getInstance() {
+		if (instance == null) {
+			instance = new RS232();
+		}
+		return instance;
+	}
+	
+	private RS232() {
+		CommPortIdentifier serialPortId;
+	    //static CommPortIdentifier sSerialPortId;
+	    Enumeration<CommPortIdentifier> enumComm;
+	    //SerialPort serialPort;
+
+	    enumComm = CommPortIdentifier.getPortIdentifiers();
+	    while (enumComm.hasMoreElements()) {
+	     	serialPortId = (CommPortIdentifier) enumComm.nextElement();
+	     	if(serialPortId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+	    		System.out.println(serialPortId.getName());
+	    	}
+	    }
+
+		System.out.println("Finished successfully");
+	}
+
+}

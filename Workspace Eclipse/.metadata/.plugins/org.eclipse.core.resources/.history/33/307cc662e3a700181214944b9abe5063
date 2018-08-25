@@ -1,0 +1,116 @@
+package main;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class GUI extends JFrame implements MouseListener {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel panel;
+	private JLabel label_graphRed, label_graphYellow, label_graphGreen;
+	
+	
+	
+	
+	Dimension dimensionGraph;
+    BufferedImage bufferedImage_graphRed, bufferedImage_graphYellow, bufferedImage_graphGreen;
+    Graphics2D graphics2d_graphRed, graphics2d_graphYellow, graphics2d_graphGreen;
+
+	public GUI() {
+		this.setSize(1000, 560);
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 20, 1000, 680);
+		add(panel);
+		
+
+		label_graphRed = new JLabel();
+		label_graphRed.setBounds(25, 25, 800, 50);
+		panel.add(label_graphRed);
+
+		label_graphYellow = new JLabel();
+		label_graphYellow.setBounds(25, 100, 800, 50);
+		panel.add(label_graphYellow);
+
+		label_graphGreen = new JLabel();
+		label_graphGreen.setBounds(25, 175, 800, 50);
+		panel.add(label_graphGreen);
+		
+		
+		dimensionGraph = new Dimension(800, 50);
+		bufferedImage_graphRed = new BufferedImage(dimensionGraph.width, dimensionGraph.height, BufferedImage.TYPE_INT_RGB);
+		bufferedImage_graphYellow = new BufferedImage(dimensionGraph.width, dimensionGraph.height, BufferedImage.TYPE_INT_RGB);
+		bufferedImage_graphGreen = new BufferedImage(dimensionGraph.width, dimensionGraph.height, BufferedImage.TYPE_INT_RGB);
+
+
+		graphics2d_graphRed = bufferedImage_graphRed.createGraphics();
+		graphics2d_graphRed.setBackground(Color.WHITE);
+		graphics2d_graphRed.fillRect(0, 0, dimensionGraph.width, dimensionGraph.height);
+		graphics2d_graphRed.setColor(Color.BLACK);
+        graphics2d_graphRed.setStroke(new BasicStroke(2));
+        
+        
+        label_graphRed.setIcon(new ImageIcon(bufferedImage_graphRed));
+        
+        
+        
+		
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Verkehrsampel");
+		this.setResizable(false);
+		this.setLayout(null);
+		this.getContentPane().setBackground(Color.WHITE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	public void close() {
+		System.exit(0);
+		this.dispose();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

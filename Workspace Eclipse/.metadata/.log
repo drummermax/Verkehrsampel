@@ -1,0 +1,168 @@
+!SESSION 2018-08-24 16:07:34.380 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-08-24 16:08:12.467
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\MaximilianWillers'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.ds 1 0 2018-08-24 16:09:34.862
+!MESSAGE Could not bind a reference of component org.eclipse.fx.core.internal.JUtilLoggerFactory. The reference is: Reference[name = registerHandler, interface = java.util.logging.Handler, policy = dynamic, policy-option = greedy, cardinality = 0..n, target = null, bind = registerHandler, unbind = unregisterHandler, updated = null]
+
+!ENTRY org.eclipse.equinox.ds 1 0 2018-08-24 16:09:59.051
+!MESSAGE Could not bind a reference of component org.eclipse.fx.ide.css.cssext.ui.internal.DefaultCssExtProvider. The reference is: Reference[name = ICSSExtModelProvider, interface = org.eclipse.fx.ide.css.cssext.ICSSExtModelProvider, policy = dynamic, cardinality = 0..n, target = null, bind = bindCssExtensionModelProvider, unbind = unbindCssExtensionModelProvider]
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-08-24 16:11:26.369
+!MESSAGE Exception caught during execution of add command
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of add command
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:211)
+	at org.eclipse.egit.core.op.CommitOperation.addUntracked(CommitOperation.java:222)
+	at org.eclipse.egit.core.op.CommitOperation.access$4(CommitOperation.java:210)
+	at org.eclipse.egit.core.op.CommitOperation$1.run(CommitOperation.java:195)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.CommitOperation.execute(CommitOperation.java:206)
+	at org.eclipse.egit.ui.internal.commit.CommitJob.run(CommitJob.java:98)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Der Prozess kann nicht auf die Datei zugreifen, da ein anderer Prozess einen Teil der Datei gesperrt hat
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:302)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:103)
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:187)
+	... 7 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-08-24 16:12:21.283
+!MESSAGE Exception caught during execution of add command
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of add command
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:211)
+	at org.eclipse.egit.core.op.CommitOperation.addUntracked(CommitOperation.java:222)
+	at org.eclipse.egit.core.op.CommitOperation.access$4(CommitOperation.java:210)
+	at org.eclipse.egit.core.op.CommitOperation$1.run(CommitOperation.java:195)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.CommitOperation.execute(CommitOperation.java:206)
+	at org.eclipse.egit.ui.internal.commit.CommitJob.run(CommitJob.java:98)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Der Prozess kann nicht auf die Datei zugreifen, da ein anderer Prozess einen Teil der Datei gesperrt hat
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:302)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:103)
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:187)
+	... 7 more
+!SESSION 2018-08-24 16:12:37.401 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.equinox.ds 1 0 2018-08-24 16:15:05.297
+!MESSAGE Could not bind a reference of component org.eclipse.fx.core.internal.JUtilLoggerFactory. The reference is: Reference[name = registerHandler, interface = java.util.logging.Handler, policy = dynamic, policy-option = greedy, cardinality = 0..n, target = null, bind = registerHandler, unbind = unregisterHandler, updated = null]
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-08-24 16:15:12.326
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\MaximilianWillers'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.ds 1 0 2018-08-24 16:15:15.751
+!MESSAGE Could not bind a reference of component org.eclipse.fx.ide.css.cssext.ui.internal.DefaultCssExtProvider. The reference is: Reference[name = ICSSExtModelProvider, interface = org.eclipse.fx.ide.css.cssext.ICSSExtModelProvider, policy = dynamic, cardinality = 0..n, target = null, bind = bindCssExtensionModelProvider, unbind = unbindCssExtensionModelProvider]
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-08-24 16:15:31.212
+!MESSAGE Exception caught during execution of add command
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of add command
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:211)
+	at org.eclipse.egit.core.op.CommitOperation.addUntracked(CommitOperation.java:222)
+	at org.eclipse.egit.core.op.CommitOperation.access$4(CommitOperation.java:210)
+	at org.eclipse.egit.core.op.CommitOperation$1.run(CommitOperation.java:195)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.CommitOperation.execute(CommitOperation.java:206)
+	at org.eclipse.egit.ui.internal.commit.CommitJob.run(CommitJob.java:98)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Der Prozess kann nicht auf die Datei zugreifen, da ein anderer Prozess einen Teil der Datei gesperrt hat
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:302)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:103)
+	at org.eclipse.jgit.api.AddCommand.call(AddCommand.java:187)
+	... 7 more
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-08-24 16:19:10.706
+!MESSAGE An internal error occurred
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of commit command
+	at org.eclipse.jgit.api.CommitCommand.call(CommitCommand.java:296)
+	at org.eclipse.egit.core.op.CommitOperation.commit(CommitOperation.java:243)
+	at org.eclipse.egit.core.op.CommitOperation.access$5(CommitOperation.java:232)
+	at org.eclipse.egit.core.op.CommitOperation$1.run(CommitOperation.java:196)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.CommitOperation.execute(CommitOperation.java:206)
+	at org.eclipse.egit.ui.internal.commit.CommitJob.run(CommitJob.java:98)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Der Prozess kann nicht auf die Datei zugreifen, da ein anderer Prozess einen Teil der Datei gesperrt hat
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:302)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:103)
+	at org.eclipse.jgit.api.CommitCommand.createTemporaryIndex(CommitCommand.java:396)
+	at org.eclipse.jgit.api.CommitCommand.call(CommitCommand.java:223)
+	... 7 more
+!SESSION 2018-08-24 16:21:29.554 -----------------------------------------------
+eclipse.buildId=4.5.2.M20160212-1500
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=de_DE
+Framework arguments:  -product org.eclipse.epp.package.cpp.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.cpp.product
+
+!ENTRY org.eclipse.equinox.ds 1 0 2018-08-24 16:21:39.468
+!MESSAGE Could not bind a reference of component org.eclipse.fx.core.internal.JUtilLoggerFactory. The reference is: Reference[name = registerHandler, interface = java.util.logging.Handler, policy = dynamic, policy-option = greedy, cardinality = 0..n, target = null, bind = registerHandler, unbind = unregisterHandler, updated = null]
+
+!ENTRY org.eclipse.egit.ui 2 0 2018-08-24 16:21:47.252
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\MaximilianWillers'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.equinox.ds 1 0 2018-08-24 16:21:48.576
+!MESSAGE Could not bind a reference of component org.eclipse.fx.ide.css.cssext.ui.internal.DefaultCssExtProvider. The reference is: Reference[name = ICSSExtModelProvider, interface = org.eclipse.fx.ide.css.cssext.ICSSExtModelProvider, policy = dynamic, cardinality = 0..n, target = null, bind = bindCssExtensionModelProvider, unbind = unbindCssExtensionModelProvider]
+
+!ENTRY org.eclipse.jdt.ui 2 0 2018-08-25 00:43:58.792
+!MESSAGE The 'org.eclipse.fx.ide.jdt.ui.id2' proposal computer from the 'org.eclipse.fx.ide.jdt.ui' plug-in did not complete normally. The extension violated the API contract of the 'computeContextInformation()' operation.
+
+!ENTRY org.eclipse.egit.ui 4 0 2018-08-25 01:03:22.266
+!MESSAGE An internal error occurred
+!STACK 0
+org.eclipse.jgit.api.errors.JGitInternalException: Exception caught during execution of commit command
+	at org.eclipse.jgit.api.CommitCommand.call(CommitCommand.java:296)
+	at org.eclipse.egit.core.op.CommitOperation.commit(CommitOperation.java:243)
+	at org.eclipse.egit.core.op.CommitOperation.access$5(CommitOperation.java:232)
+	at org.eclipse.egit.core.op.CommitOperation$1.run(CommitOperation.java:196)
+	at org.eclipse.core.internal.resources.Workspace.run(Workspace.java:2241)
+	at org.eclipse.egit.core.op.CommitOperation.execute(CommitOperation.java:206)
+	at org.eclipse.egit.ui.internal.commit.CommitJob.run(CommitJob.java:98)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+Caused by: java.io.IOException: Der Prozess kann nicht auf die Datei zugreifen, da ein anderer Prozess einen Teil der Datei gesperrt hat
+	at java.io.FileInputStream.readBytes(Native Method)
+	at java.io.FileInputStream.read(Unknown Source)
+	at org.eclipse.jgit.util.IO.readFully(IO.java:302)
+	at org.eclipse.jgit.internal.storage.file.ObjectDirectoryInserter.insert(ObjectDirectoryInserter.java:103)
+	at org.eclipse.jgit.api.CommitCommand.createTemporaryIndex(CommitCommand.java:396)
+	at org.eclipse.jgit.api.CommitCommand.call(CommitCommand.java:223)
+	... 7 more
+
+!ENTRY org.eclipse.equinox.security 1 0 2018-08-25 01:03:59.565
+!MESSAGE New keyring password generated. 

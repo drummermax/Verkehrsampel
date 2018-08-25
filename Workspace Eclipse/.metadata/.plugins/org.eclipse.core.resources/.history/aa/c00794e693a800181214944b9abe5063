@@ -1,0 +1,17 @@
+package main;
+
+public class RS232 {
+	private static RS232 instance;
+	
+	public static RS232 getInstance() {
+		if (instance == null) {
+			instance = new RS232();
+		}
+		return instance;
+	}
+	
+	private RS232() {
+		
+	}
+
+}

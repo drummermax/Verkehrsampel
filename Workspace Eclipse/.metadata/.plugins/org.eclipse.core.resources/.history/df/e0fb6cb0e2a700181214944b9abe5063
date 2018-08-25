@@ -1,0 +1,106 @@
+package main;
+
+import java.awt.BasicStroke;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.image.BufferedImage;
+
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
+public class GUI extends JFrame implements MouseListener {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel panel;
+	private JLabel label_graphRed, label_graphYellow, label_graphGreen;
+	
+	
+	
+	
+	Dimension imgDim = new Dimension(200,200);
+    BufferedImage mazeImage = new BufferedImage(imgDim.width, imgDim.height, BufferedImage.TYPE_INT_RGB);
+    Graphics2D g2d;
+
+	public GUI() {
+		this.setSize(1000, 560);
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 20, 1000, 680);
+		add(panel);
+		
+
+		label_lineInMicrophone1 = new JLabel();
+		label_lineInMicrophone1.setBounds(25, 0, 150, 25);
+		
+		
+		
+
+		g2d = mazeImage.createGraphics();
+		g2d.setBackground(Color.WHITE);
+        g2d.fillRect(0, 0, imgDim.width, imgDim.height);
+        g2d.setColor(Color.BLACK);
+        BasicStroke bs = new BasicStroke(2);
+        g2d.setStroke(bs);
+        
+        ImageIcon ii = new ImageIcon(mazeImage);
+        JOptionPane.showMessageDialog(null, ii);
+		
+		
+		
+		
+		
+		
+		//this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		this.setTitle("Verkehrsampel");
+		this.setResizable(false);
+		this.setLayout(null);
+		this.getContentPane().setBackground(Color.WHITE);
+		this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		this.setVisible(true);
+	}
+	
+	public void close() {
+		System.exit(0);
+		this.dispose();
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

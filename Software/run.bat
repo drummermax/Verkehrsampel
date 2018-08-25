@@ -1,0 +1,1 @@
+java -jar -Djava.library.path="D:\Verkehrsampel\Software\rxtx" Verkehrsampel.jar -DD:\Verkehrsampel\Software\rxtx\RXTXcomm.jar

@@ -1,0 +1,59 @@
+package main;
+
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class GUI extends JFrame implements MouseListener {
+
+	private static final long serialVersionUID = 1L;
+
+	private JPanel panel;
+	
+	public GUI() {
+		this.setSize(800, 360);
+		panel = new JPanel();
+		panel.setLayout(null);
+		panel.setBackground(Color.WHITE);
+		panel.setBounds(0, 20, 800, 480);
+		add(panel);
+	
+	
+	
+	
+	
+	
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+}

@@ -1,0 +1,52 @@
+package main;
+
+import java.io.OutputStream;
+import java.util.Enumeration;
+
+import gnu.io.*;
+
+public class RS232 {
+	private static RS232 instance;
+	
+	CommPortIdentifier serialPortId;
+	Enumeration<CommPortIdentifier> enumComm;
+	SerialPort serialPort;
+	OutputStream outputStream;
+	// InputStream inputStream;
+	Boolean serialPortGeoeffnet = false;
+
+	int baudrate = 9600;
+	int dataBits = SerialPort.DATABITS_8;
+	int stopBits = SerialPort.STOPBITS_1;
+	int parity = SerialPort.PARITY_NONE;
+	String portName = "/dev/ttyS0";
+	
+	
+	
+	
+	public static RS232 getInstance() {
+		if (instance == null) {
+			instance = new RS232();
+		}
+		return instance;
+	}
+	
+	@SuppressWarnings("unchecked")
+	private RS232() {
+		CommPortIdentifier serialPortId;
+	    //static CommPortIdentifier sSerialPortId;
+	    Enumeration<CommPortIdentifier> enumComm;
+	    //SerialPort serialPort;
+
+	    enumComm = CommPortIdentifier.getPortIdentifiers();
+	    while (enumComm.hasMoreElements()) {
+	     	serialPortId = enumComm.nextElement();
+	     	if(serialPortId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+	    		System.out.println(serialPortId.getName());
+	    	}
+	    }
+
+		System.out.println("Finished successfully");
+	}
+
+}

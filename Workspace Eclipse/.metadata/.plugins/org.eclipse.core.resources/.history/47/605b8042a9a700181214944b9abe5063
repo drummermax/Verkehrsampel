@@ -1,0 +1,10 @@
+package main;
+
+import java.awt.event.MouseListener;
+
+import javax.swing.JFrame;
+
+public class GUI extends JFrame implements MouseListener {
+	
+	
+}

@@ -1,0 +1,155 @@
+package main;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.util.Enumeration;
+
+import gnu.io.*;
+
+public class RS232 {
+	private static RS232 instance;
+	
+	private CommPortIdentifier serialPortId;
+	private Enumeration<CommPortIdentifier> enumComm;
+	private SerialPort serialPort;
+	private OutputStream outputStream;
+	private boolean serialPortGeoeffnet = false;
+
+	private int baudrate = 9600;
+	private int dataBits = SerialPort.DATABITS_8;
+	private int stopBits = SerialPort.STOPBITS_1;
+	private int parity = SerialPort.PARITY_NONE;
+	private String portName = "COM5";
+
+	public static RS232 getInstance() {
+		if (instance == null) {
+			instance = new RS232();
+		}
+		return instance;
+	}
+	
+	private RS232() {
+		
+	}
+	
+	@SuppressWarnings("unchecked")
+	public String[] getPortNames() {
+		CommPortIdentifier serialPortIdCount;
+	    Enumeration<CommPortIdentifier> enumCommCount;
+	    
+	    int counter = 0;
+
+	    enumCommCount = CommPortIdentifier.getPortIdentifiers();
+	    while (enumCommCount.hasMoreElements()) {
+	    	serialPortIdCount = enumCommCount.nextElement();
+	     	if(serialPortIdCount.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+	    		counter++;
+	    	}
+	    }
+	    
+	    if (counter == 0) {
+	    	return null;
+	    }
+	    
+	    String[] portNames = new String[counter];
+	    counter = 0;
+
+	    enumCommCount = CommPortIdentifier.getPortIdentifiers();
+	    while (enumCommCount.hasMoreElements()) {
+	    	serialPortIdCount = enumCommCount.nextElement();
+	     	if(serialPortIdCount.getPortType() == CommPortIdentifier.PORT_SERIAL) {
+	    		portNames[counter++] = serialPortIdCount.getName();
+	    	}
+	    }
+	    
+	    return portNames;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public boolean oeffneSerialPort(String portName)
+	{
+		boolean foundPort = false;
+		if (serialPortGeoeffnet != false) {
+			System.out.println("Serialport bereits geöffnet");
+			return false;
+		}
+		System.out.println("Öffne Serialport");
+		enumComm = CommPortIdentifier.getPortIdentifiers();
+		while(enumComm.hasMoreElements()) {
+			serialPortId = (CommPortIdentifier) enumComm.nextElement();
+			if (portName.contentEquals(serialPortId.getName())) {
+				foundPort = true;
+				break;
+			}
+		}
+		if (foundPort != true) {
+			System.out.println("Serialport nicht gefunden: " + portName);
+			return false;
+		}
+		try {
+			serialPort = (SerialPort) serialPortId.open("Öffnen und Senden", 500);
+		} catch (PortInUseException e) {
+			System.out.println("Port belegt");
+		}
+		try {
+			outputStream = serialPort.getOutputStream();
+		} catch (IOException e) {
+			System.out.println("Keinen Zugriff auf OutputStream");
+		}
+		
+		try {
+			serialPort.setSerialPortParams(baudrate, dataBits, stopBits, parity);
+		} catch(UnsupportedCommOperationException e) {
+			System.out.println("Konnte Schnittstellen-Paramter nicht setzen");
+		}
+		
+		serialPortGeoeffnet = true;
+		return true;
+	}
+
+	public void schliesseSerialPort()
+	{
+		if ( serialPortGeoeffnet == true) {
+			System.out.println("Schließe Serialport");
+			serialPort.close();
+			serialPortGeoeffnet = false;
+		} else {
+			System.out.println("Serialport bereits geschlossen");
+		}
+	}
+	
+	public void sendeSerialPort(byte[] data)
+	{
+		for (int i = 0; i < data.length; i++) {
+
+			System.out.print("0b");
+			System.out.print(String.format("%8s", Integer.toBinaryString(data[i] & 0xFF)).replace(' ', '0'));
+			System.out.print(", ");
+		}
+		
+		
+		
+		if (serialPortGeoeffnet != true)
+			return;
+		try {
+			outputStream.write(data);
+		} catch (IOException e) {
+			System.out.println("Fehler beim Senden");
+		}
+	}
+	
+
+	public String getPortName() {
+		return portName;
+	}
+
+	public void setPortName(String portName) {
+		this.portName = portName;
+	}
+	
+	
+	
+	
+	
+
+}

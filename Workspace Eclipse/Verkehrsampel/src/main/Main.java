@@ -13,8 +13,6 @@ public class Main {
 		fieldSysPath.setAccessible(true);
 		fieldSysPath.set(null, null);
 
-		System.out.println(System.getProperty("java.library.path"));
-
 		RS232.getInstance();
 
 		GUI gui = new GUI();

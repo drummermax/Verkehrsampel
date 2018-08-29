@@ -48,7 +48,9 @@ public class RS232 {
 	    }
 	    
 	    if (counter == 0) {
-	    	return null;
+	    	String[] nullString = new String[1];
+	    	nullString[0] = "";
+	    	return nullString;
 	    }
 	    
 	    String[] portNames = new String[counter];

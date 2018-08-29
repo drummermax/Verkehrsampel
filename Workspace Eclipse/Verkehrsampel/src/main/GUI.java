@@ -3,7 +3,6 @@ package main;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,7 +19,6 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.JTextField;
@@ -169,7 +167,7 @@ public class GUI extends JFrame implements MouseListener {
 						sequenceLengthSeconds = 51;
 				} catch (NumberFormatException eNumberFirmatException) {
 				}
-				textfield_sequenceLength.setText("Länge: " + Double.toString(sequenceLengthSeconds));
+				textfield_sequenceLength.setText("Länge: " + Double.toString(sequenceLengthSeconds) + "s");
 			}
 		});
 		textfield_sequenceLength.addMouseListener(this);
